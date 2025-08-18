@@ -6,11 +6,13 @@ class Car{
         this.width=width;
         this.controls=new Controls();
         this.speed=0;
-        this.acceleration=0.1;
-        this.friction=0.03;
+        this.acceleration=0.15;
+        this.friction=0.02;
         this.maxSpeed=4.5;
+        this.steeringFriction=0.04;
         this.angle=0;
-        this.brakesfriction=0.1;
+        this.brakesFriction=0.1;
+        this.currentFriction=this.friction;
     }
     update(){
         this.#move(); //car movement physics
@@ -30,34 +32,24 @@ class Car{
         if(this.speed<-this.maxSpeed/2){
             this.speed=-this.maxSpeed/2;
         }
-        //brakes
-        if(this.controls.brakes){
-            if(this.speed>0){
-                if(this.speed>=this.brakesfriction){
-                    this.speed-=this.brakesfriction;
-                }
-                else{
-                    this.speed=0;
-                }
-            }
-            if(this.speed<0){
-                if(this.speed<=this.brakesfriction){
-                    this.speed+=this.brakesfriction;
-                }
-                else{
-                    this.speed=0;
-                }
-            }
+        this.currentFriction=this.friction;
+        // steering friction on car
+        if(this.controls.left||this.controls.right){
+            this.currentFriction=this.steeringFriction;
         }
-        // normal friction on car
+        //brake friction on car
+        if(this.controls.brakes){
+            this.currentFriction=this.brakesFriction;
+        }
+        //friction effect
+        if(Math.abs(this.speed)<this.currentFriction){
+            this.speed=0;
+        }
         if(this.speed>0){
-            this.speed-=this.friction;
+            this.speed-=this.currentFriction;
         }
         if(this.speed<0){
-            this.speed+=this.friction;
-        }
-        if(Math.abs(this.speed)<this.friction){
-            this.speed=0;
+            this.speed+=this.currentFriction;
         }
         //steering controls
         if(this.controls.left){

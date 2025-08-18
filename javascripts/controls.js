@@ -24,7 +24,6 @@ class Controls{
             else if(e.key==" "){
                 this.brakes=true;
             }
-            console.table(this);
         }
         document.onkeyup=(e)=>{
             if(e.key=="w"||e.key=="W"){
