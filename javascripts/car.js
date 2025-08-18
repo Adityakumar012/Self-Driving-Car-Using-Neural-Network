@@ -6,27 +6,50 @@ class Car{
         this.width=width;
         this.controls=new Controls();
         this.speed=0;
-        this.acceleration=0.2;
-        this.friction=0.05;
-        this.maxSpeed=4;
+        this.acceleration=0.1;
+        this.friction=0.03;
+        this.maxSpeed=4.5;
         this.angle=0;
+        this.brakesfriction=0.1;
     }
     update(){
         this.#move(); //car movement physics
     }
     #move(){
+        //controling speed of the car
         if(this.controls.forward){
             this.speed+=this.acceleration;
         }
         if(this.controls.backward){
             this.speed-=this.acceleration;
         }
+        //max speed 
         if(this.speed>this.maxSpeed){
             this.speed=this.maxSpeed;
         }
         if(this.speed<-this.maxSpeed/2){
             this.speed=-this.maxSpeed/2;
         }
+        //brakes
+        if(this.controls.brakes){
+            if(this.speed>0){
+                if(this.speed>=this.brakesfriction){
+                    this.speed-=this.brakesfriction;
+                }
+                else{
+                    this.speed=0;
+                }
+            }
+            if(this.speed<0){
+                if(this.speed<=this.brakesfriction){
+                    this.speed+=this.brakesfriction;
+                }
+                else{
+                    this.speed=0;
+                }
+            }
+        }
+        // normal friction on car
         if(this.speed>0){
             this.speed-=this.friction;
         }
@@ -36,6 +59,7 @@ class Car{
         if(Math.abs(this.speed)<this.friction){
             this.speed=0;
         }
+        //steering controls
         if(this.controls.left){
             if(this.speed>0){
                 this.angle+=0.03;

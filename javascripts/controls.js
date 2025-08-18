@@ -4,6 +4,7 @@ class Controls{
         this.backward=false;
         this.left=false;
         this.right=false;
+        this.brakes=false;
         this.#addKeyboardListeners();
     }
     #addKeyboardListeners(){
@@ -20,6 +21,10 @@ class Controls{
             else if(e.key=="d"||e.key=="D"){
                 this.right=true;
             }
+            else if(e.key==" "){
+                this.brakes=true;
+            }
+            console.table(this);
         }
         document.onkeyup=(e)=>{
             if(e.key=="w"||e.key=="W"){
@@ -33,6 +38,9 @@ class Controls{
             }
             else if(e.key=="d"||e.key=="D"){
                 this.right=false;
+            }
+            else if(e.key==" "){
+                this.brakes=false;
             }
         }
     }

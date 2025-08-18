@@ -8,6 +8,5 @@ body{
     text-align: center;
 }
 #mainCanvas{
-    border: 2px solid rgb(0, 0, 0);
     background: lightgray;
 }
