@@ -7,7 +7,7 @@ const car=new Car(road.getLaneCenter(1),canvas.height*0.8,30,50);
 car.draw(ctx);
 animate();
 function animate(){
-    car.update();
+    car.update(road.border);
     canvas.height=window.innerHeight;
     ctx.save();
     ctx.translate(0,-car.y+canvas.height*0.8);

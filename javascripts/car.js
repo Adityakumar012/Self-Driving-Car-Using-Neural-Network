@@ -4,7 +4,6 @@ class Car{
         this.y=y;
         this.height=height;
         this.width=width;
-        this.controls=new Controls();
         this.speed=0;
         this.acceleration=0.15;
         this.friction=0.02;
@@ -13,9 +12,12 @@ class Car{
         this.angle=0;
         this.brakesFriction=0.1;
         this.currentFriction=this.friction;
+        this.controls=new Controls();
+        this.sensor=new Sensor(this);
     }
-    update(){
+    update(border){
         this.#move(); //car movement physics
+        this.sensor.update(border);
     }
     #move(){
         //controling speed of the car
@@ -72,6 +74,7 @@ class Car{
         this.y-=Math.cos(this.angle)*this.speed;
     }
     draw(ctx){    
+        this.sensor.draw(ctx);
         ctx.save();                  //draw methord
         ctx.translate(this.x,this.y);
         ctx.rotate(-this.angle);

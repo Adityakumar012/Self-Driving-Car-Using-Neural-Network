@@ -33,5 +33,6 @@ class Road{
             ctx.lineTo(xValue,this.bottom);
             ctx.stroke();
         }
+        ctx.setLineDash([]);
     }
 }
