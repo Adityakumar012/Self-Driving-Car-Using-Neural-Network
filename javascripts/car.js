@@ -15,9 +15,9 @@ class Car{
         this.controls=new Controls();
         this.sensor=new Sensor(this);
     }
-    update(){
+    update(border){
         this.#move(); //car movement physics
-        this.sensor.update();
+        this.sensor.update(border);
     }
     #move(){
         //controling speed of the car
