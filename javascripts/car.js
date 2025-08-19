@@ -23,7 +23,7 @@ class Car{
             this.speed+=this.acceleration;
         }
         if(this.controls.backward){
-            this.speed-=this.acceleration;
+            this.speed-=this.acceleration/2;
         }
         //max speed 
         if(this.speed>this.maxSpeed){
