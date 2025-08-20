@@ -14,10 +14,61 @@ class Car{
         this.currentFriction=this.friction;
         this.controls=new Controls();
         this.sensor=new Sensor(this);
+        this.points=[];
+        this.crashed=false;
+        this.#findPoints();
     }
     update(border){
-        this.#move(); //car movement physics
-        this.sensor.update(border);
+        this.#findPoints();
+        this.crashed=this.#checkCrash(border);
+        if(!this.crashed){
+            this.#move(); //car movement physics
+            this.sensor.update(border);
+        }
+    }
+    #findPoints(){
+        this.points=[];
+        const alpha=Math.atan2(this.width,this.height);
+        const r=Math.hypot(this.width,this.height)/2;
+        this.points.push({x:this.x+Math.sin(alpha-this.angle)*r,y:this.y-Math.cos(alpha-this.angle)*r});
+        this.points.push({x:this.x+Math.sin(alpha+this.angle)*r,y:this.y+Math.cos(alpha+this.angle)*r});
+        this.points.push({x:this.x-Math.sin(alpha-this.angle)*r,y:this.y+Math.cos(alpha-this.angle)*r});
+        this.points.push({x:this.x-Math.sin(alpha+this.angle)*r,y:this.y-Math.cos(alpha+this.angle)*r});
+    }
+    #findIntersection(A,B,C,D){
+        const tTop=(D.x-C.x)*(A.y-C.y)-(D.y-C.y)*(A.x-C.x);   //line intersection logic
+        const uTop=(C.y-A.y)*(A.x-B.x)-(C.x-A.x)*(A.y-B.y);
+        const bottom=(D.y-C.y)*(B.x-A.x)-(D.x-C.x)*(B.y-A.y);
+        if(bottom!=0){
+            const t=tTop/bottom;
+            const u=uTop/bottom;
+            if(t>=0 && t<=1 && u>=0 && u<=1){
+                return {
+                    x:A.x+(B.x-A.x)*t,
+                    y:A.y+(B.y-A.y)*t,
+                    ratio:t
+                }
+            }
+        }
+        return null;
+    }
+    #checkCrash(border){
+        for(let i=0;i<border.length;i++){
+            if(this.#findPolyIntersection(this.points,border[i])){
+                return true;
+            }
+        }
+        return false;
+    }
+    #findPolyIntersection(poly1,poly2){
+        for(let i=0;i<poly1.length;i++){
+            for(let j=0;j<poly2.length;j++){
+                if(this.#findIntersection(poly1[i],poly1[(i+1)%poly1.length],poly2[j],poly2[(j+1)%poly2.length])){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
     #move(){
         //controling speed of the car
@@ -75,17 +126,17 @@ class Car{
     }
     draw(ctx){    
         this.sensor.draw(ctx);
-        ctx.save();                  //draw methord
-        ctx.translate(this.x,this.y);
-        ctx.rotate(-this.angle);
+        if(this.crashed){
+            ctx.fillStyle="#ff0000ff";
+        }
+        else{
+            ctx.fillStyle="black";
+        }
         ctx.beginPath();
-        ctx.rect(
-            -this.width/2,
-            -this.height/2,
-            this.width,
-            this.height
-        )
+        ctx.moveTo(this.points[0].x, this.points[0].y);
+        for(let i=1;i<this.points.length;i++){
+            ctx.lineTo(this.points[i].x, this.points[i].y);
+        }
         ctx.fill();
-        ctx.restore();
     }
 }
