@@ -19,10 +19,10 @@ class Car{
         this.#findPoints();
     }
     update(border){
-        this.#findPoints();
-        this.crashed=this.#checkCrash(border);
         if(!this.crashed){
             this.#move(); //car movement physics
+            this.#findPoints();
+            this.crashed=this.#checkCrash(border);
             this.sensor.update(border);
         }
     }
