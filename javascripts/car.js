@@ -1,29 +1,34 @@
 class Car{
-    constructor(x,y,width,height){
+    constructor(x,y,width,height,driveable){
         this.x=x;
         this.y=y;
         this.height=height;
         this.width=width;
         this.speed=0;
+        this.driveable=driveable;
+        this.nonDriveableSpeed=0.5;
         this.acceleration=0.15;
         this.friction=0.02;
-        this.maxSpeed=4.5;
+        this.maxSpeed=5.5;
         this.steeringFriction=0.04;
         this.angle=0;
         this.brakesFriction=0.1;
         this.currentFriction=this.friction;
-        this.controls=new Controls();
-        this.sensor=new Sensor(this);
+        this.controls=new Controls(driveable);
+        if(driveable)this.sensor=new Sensor(this);
         this.points=[];
         this.crashed=false;
+        if(!driveable){
+            this.maxSpeed*=this.nonDriveableSpeed;
+        }
         this.#findPoints();
     }
-    update(border){
+    update(border,traffic){
         if(!this.crashed){
             this.#move(); //car movement physics
             this.#findPoints();
-            this.crashed=this.#checkCrash(border);
-            this.sensor.update(border);
+            this.crashed=this.#checkCrash(border,traffic);
+            if(this.driveable)this.sensor.update(border,traffic);
         }
     }
     #findPoints(){
@@ -52,9 +57,14 @@ class Car{
         }
         return null;
     }
-    #checkCrash(border){
+    #checkCrash(border,traffic){
         for(let i=0;i<border.length;i++){
             if(this.#findPolyIntersection(this.points,border[i])){
+                return true;
+            }
+        }
+        for(let i=0;i<traffic.length;i++){
+            if(this.#findPolyIntersection(this.points,traffic[i].points)){
                 return true;
             }
         }
@@ -125,12 +135,13 @@ class Car{
         this.y-=Math.cos(this.angle)*this.speed;
     }
     draw(ctx){    
-        this.sensor.draw(ctx);
+        if(this.driveable)this.sensor.draw(ctx);
         if(this.crashed){
             ctx.fillStyle="#ff0000ff";
         }
         else{
             ctx.fillStyle="black";
+            if(this.driveable)ctx.fillStyle="#d900ffff";
         }
         ctx.beginPath();
         ctx.moveTo(this.points[0].x, this.points[0].y);

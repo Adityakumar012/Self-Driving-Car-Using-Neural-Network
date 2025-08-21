@@ -1,13 +1,13 @@
 class Sensor{
     constructor(car){
         this.car=car;
-        this.sensorCount=7;
+        this.sensorCount=9;
         this.sensorRange=150;
         this.sensorAngle=Math.PI/2;
         this.sensor=[];
         this.intersection=[];
     }
-    update(border){
+    update(border,traffic){
         this.#findSensorLine();
         this.intersection=[];
         for(let i=0;i<this.sensor.length;i++){
@@ -21,6 +21,18 @@ class Sensor{
                         ratio=result.ratio;
                         x=result.x;
                         y=result.y;
+                    }
+                }
+            }
+            for(let j=0;j<traffic.length;j++){
+                for(let l=0;l<traffic[j].points.length;l++){
+                    const result=this.#findIntersection(this.sensor[i][0],this.sensor[i][1],traffic[j].points[l],traffic[j].points[(l+1)%traffic[j].points.length]);
+                    if(result!=null){
+                        if(ratio>result.ratio){
+                            ratio=result.ratio;
+                            x=result.x;
+                            y=result.y;
+                        }
                     }
                 }
             }

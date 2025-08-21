@@ -1,11 +1,15 @@
 class Controls{
-    constructor(){
+    constructor(driveable){
         this.forward=false;
         this.backward=false;
         this.left=false;
         this.right=false;
         this.brakes=false;
-        this.#addKeyboardListeners();
+        if(driveable){
+            this.#addKeyboardListeners();
+        }else{
+            this.forward=true;
+        }
     }
     #addKeyboardListeners(){
         document.onkeydown=(e)=>{
