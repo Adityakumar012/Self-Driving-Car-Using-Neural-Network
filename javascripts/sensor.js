@@ -1,9 +1,9 @@
 class Sensor{
     constructor(car){
         this.car=car;
-        this.sensorCount=9;
-        this.sensorRange=150;
-        this.sensorAngle=Math.PI/2;
+        this.sensorCount=rayCount;
+        this.sensorRange=rayRange;
+        this.sensorAngle=(Math.PI/180)*rayAngle;
         this.sensor=[];
         this.intersection=[];
     }
@@ -36,7 +36,7 @@ class Sensor{
                     }
                 }
             }
-            this.intersection.push({x:x,y:y});
+            this.intersection.push({x:x,y:y,ratio:ratio});
         }
     }
 
@@ -75,17 +75,21 @@ class Sensor{
                 ctx.lineWidth=3;
                 ctx.shadowBlur = 0;
                 ctx.strokeStyle="#ff0000ff";
-                ctx.beginPath();
-                ctx.moveTo(this.intersection[i].x,this.intersection[i].y);
-                ctx.lineTo(this.sensor[i][1].x,this.sensor[i][1].y);
-                ctx.stroke();
+                if(redRay){
+                    ctx.beginPath();
+                    ctx.moveTo(this.intersection[i].x,this.intersection[i].y);
+                    ctx.lineTo(this.sensor[i][1].x,this.sensor[i][1].y);
+                    ctx.stroke();
+                }
                 ctx.shadowColor = "#000000ff";
                 ctx.shadowBlur = 2;
                 ctx.strokeStyle="#00ff1eff";
-                ctx.beginPath();
-                ctx.moveTo(this.sensor[i][0].x,this.sensor[i][0].y);
-                ctx.lineTo(this.intersection[i].x,this.intersection[i].y);
-                ctx.stroke();
+                if(greenRay){
+                    ctx.beginPath();
+                    ctx.moveTo(this.sensor[i][0].x,this.sensor[i][0].y);
+                    ctx.lineTo(this.intersection[i].x,this.intersection[i].y);
+                    ctx.stroke();
+                }
         }
     }
 }

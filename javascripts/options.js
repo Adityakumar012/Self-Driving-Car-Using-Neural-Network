@@ -1,0 +1,10 @@
+const greenRay =1;
+const redRay =1;
+const carCount=100;
+const lanes=3;
+const genaticRandomness=0.05;
+const trafficProbablity=0.1;
+const rayCount=20;
+const rayRange=300;
+const rayAngle=90;
+const race=0;

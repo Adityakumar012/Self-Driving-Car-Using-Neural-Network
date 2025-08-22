@@ -9,13 +9,17 @@ class Car{
         this.nonDriveableSpeed=0.5;
         this.acceleration=0.15;
         this.friction=0.02;
-        this.maxSpeed=5.5;
+        this.maxSpeed=7.5;
         this.steeringFriction=0.04;
         this.angle=0;
         this.brakesFriction=0.1;
         this.currentFriction=this.friction;
+        this.ai=(driveable==2);
         this.controls=new Controls(driveable);
-        if(driveable)this.sensor=new Sensor(this);
+        if(driveable){
+            this.sensor=new Sensor(this);
+            this.neuralNetwork=new Network([this.sensor.sensorCount,100,40,4]);
+        }
         this.points=[];
         this.crashed=false;
         if(!driveable){
@@ -25,10 +29,20 @@ class Car{
     }
     update(border,traffic){
         if(!this.crashed){
+            if(this.driveable){
+                this.sensor.update(border,traffic);
+                const ratio=this.sensor.intersection.map(e=>1-e.ratio);
+                const output=Network.networkFeedForward(ratio,this.neuralNetwork); 
+                if(this.ai){
+                    this.controls.forward=output[0];
+                    this.controls.backward=output[1];
+                    this.controls.left=output[2];
+                    this.controls.right=output[3];
+                }
+            }
             this.#move(); //car movement physics
             this.#findPoints();
             this.crashed=this.#checkCrash(border,traffic);
-            if(this.driveable)this.sensor.update(border,traffic);
         }
     }
     #findPoints(){
@@ -134,14 +148,19 @@ class Car{
         this.x-=Math.sin(this.angle)*this.speed;
         this.y-=Math.cos(this.angle)*this.speed;
     }
-    draw(ctx){    
-        if(this.driveable)this.sensor.draw(ctx);
+    draw(ctx,isBest){ 
+        if(this.driveable&&isBest)this.sensor.draw(ctx);
         if(this.crashed){
             ctx.fillStyle="#ff0000ff";
         }
         else{
             ctx.fillStyle="black";
             if(this.driveable)ctx.fillStyle="#d900ffff";
+            if(!this.ai&&this.driveable){
+                ctx.fillStyle="#ffff00ff";
+                ctx.globalAlpha=1;
+            }
+
         }
         ctx.beginPath();
         ctx.moveTo(this.points[0].x, this.points[0].y);
