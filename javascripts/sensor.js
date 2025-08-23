@@ -8,6 +8,8 @@ class Sensor{
         this.intersection=[];
     }
     update(border,traffic){
+        this.sensorRange=rayRange;
+        this.sensorAngle=(Math.PI/180)*rayAngle;
         this.#findSensorLine();
         this.intersection=[];
         for(let i=0;i<this.sensor.length;i++){

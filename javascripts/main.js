@@ -95,7 +95,7 @@ function animate(){
         traffic[i].draw(ctx);
     }
     for(let i=0;i<n;i++){
-        ctx.globalAlpha=0.3;
+        ctx.globalAlpha=alpha;
         if((i==best))ctx.globalAlpha=1;
         cars[i].draw(ctx,(i==best));
     }

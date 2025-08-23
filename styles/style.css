@@ -14,7 +14,7 @@ body{
 }
 div{
     height: 200px;
-    width: 200px;
+    width: 300px;
     position: relative;
     top:-1000px;
     display: flex;
