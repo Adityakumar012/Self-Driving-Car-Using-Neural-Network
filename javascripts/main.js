@@ -13,9 +13,17 @@ const traffic=[
 ];
 function save(){
     localStorage.setItem("bestneural",JSON.stringify(cars[best].neuralNetwork));
+    document.body.style.backgroundColor="red";
+    setTimeout(()=>{
+        document.body.style.backgroundColor="rgb(47, 47, 47)";
+    },100)
 }
 function reset(){
     localStorage.removeItem("bestneural");
+    document.body.style.backgroundColor="red";
+    setTimeout(()=>{
+        document.body.style.backgroundColor="rgb(47, 47, 47)";
+    },100)
 }   
 function genrateCars(n){
     const c=[];

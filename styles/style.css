@@ -7,6 +7,7 @@ body{
     overflow: hidden;
     text-align: center;
     background-color: rgb(47, 47, 47);
+    color: white;
 }
 #mainCanvas{
     background: lightgray;

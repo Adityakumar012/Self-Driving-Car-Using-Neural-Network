@@ -13,6 +13,18 @@
         <button onclick="save()">💾</button>
         <button onclick="reset()">🗑️</button>
     </div>
+    <div>
+        <li><input type="checkbox" id="option1">display green sensor ray</li>
+        <li><input type="checkbox" id="option2">display red sensor ray</li>
+        <li>
+            <span id="label3">sensor angle 90</span>
+            <input type="range" id="option3" class="angle-slider" min="0" max="360" value="90" step="5">
+        </li>
+        <li>
+            <span id="label4">sensor range 300</span>
+            <input type="range" id="option4" class="angle-slider" min="100" max="800" value="200" step="20">
+        </li>
+    </div>
     <script src="javascripts/geneticAlgo.js"></script>
     <script src="javascripts/options.js"></script>
     <script src="javascripts/neuralNetwork.js"></script>
