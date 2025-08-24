@@ -9,7 +9,7 @@ class Car{
         this.nonDriveableSpeed=0.5;
         this.acceleration=0.15;
         this.friction=0.02;
-        this.maxSpeed=7.5;
+        this.maxSpeed=maxSpeed;
         this.steeringFriction=0.04;
         this.angle=0;
         this.brakesFriction=0.1;
@@ -28,6 +28,10 @@ class Car{
         this.#findPoints();
     }
     update(border,traffic){
+        this.maxSpeed=maxSpeed;
+        if(!this.driveable){
+            this.maxSpeed*=this.nonDriveableSpeed;
+        }
         if(!this.crashed){
             if(this.driveable){
                 this.sensor.update(border,traffic);

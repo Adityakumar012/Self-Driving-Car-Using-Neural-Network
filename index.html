@@ -16,7 +16,10 @@
     <div>
         <li><input type="checkbox" id="option1">display green sensor ray</li>
         <li><input type="checkbox" id="option2">display red sensor ray</li>
-        <li><input type="checkbox" id="option3">display red sensor ray</li>
+        <li>
+            <span id="label3">max speed 70</span>
+            <input type="range" id="option3" class="angle-slider" min="5" max="30" value="0.2" step="1">
+        </li>
         <li>
             <span id="label4">sensor range 300</span>
             <input type="range" id="option4" class="angle-slider" min="100" max="1000" value="200" step="20">
@@ -30,8 +33,16 @@
             <input type="range" id="option6" class="angle-slider" min="0.1" max="1" value="0.2" step="0.1">
         </li>
         <li>
-            <span id="label7">number of cars</span>
-            <input type="number" id="option7"  min="1" max="1000" value="50" step="10">
+            <span id="label7">genetic randomness 10%</span>
+            <input type="range" id="option7" class="log-slider" min="0" max="40" value="10" step="1">
+        </li>
+        <li>
+            <span id="label8">number of sensor</span>
+            <input type="number" id="option8"  min="1" max="1000" value="50" step="1">
+        </li>
+        <li>
+            <span id="label9">number of cars</span>
+            <input type="number" id="option9"  min="1" max="1000" value="50" step="10">
         </li>
     </div>
     <script src="javascripts/geneticAlgo.js"></script>
