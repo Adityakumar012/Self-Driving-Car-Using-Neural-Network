@@ -10,7 +10,7 @@ class Car{
         this.acceleration=0.15;
         this.friction=0.02;
         this.maxSpeed=maxSpeed;
-        this.steeringFriction=0.04;
+        this.steeringFriction=0.1;
         this.angle=0;
         this.brakesFriction=0.1;
         this.currentFriction=this.friction;
@@ -104,7 +104,7 @@ class Car{
             this.speed+=this.acceleration;
         }
         if(this.controls.backward){
-            this.speed-=this.acceleration/2;
+            this.speed-=this.acceleration;
         }
         //max speed 
         if(this.speed>this.maxSpeed){

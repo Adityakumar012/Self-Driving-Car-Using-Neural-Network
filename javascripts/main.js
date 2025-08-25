@@ -1,6 +1,6 @@
 const canvas=document.querySelector("#mainCanvas");
 canvas.height=window.innerHeight;
-canvas.width=300;
+canvas.width=250;
 const ctx=canvas.getContext("2d");
 
 const road=new Road(canvas.width/2,canvas.width*0.9,lanes);
@@ -25,6 +25,7 @@ function reset(){
         document.body.style.backgroundColor="rgb(47, 47, 47)";
     },100)
 }   
+
 function genrateCars(n){
     const c=[];
     if(localStorage.getItem("bestneural")){
@@ -84,6 +85,9 @@ function animate(){
     }
     canvas.height=window.innerHeight;
     ctx.save();
+    if(best!=-1){
+        animateControl(cars[best].controls)
+    }
     if(race){
         ctx.translate(0,-cars[1].y+canvas.height*0.7);
     }
