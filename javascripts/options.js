@@ -73,7 +73,7 @@ else{
     label3.textContent = `max speed ${maxSpeed*10}`;
 }
 updateSlider(option3);
-option3.addEventListener("change", () => {
+option3.addEventListener("input", () => {
     updateSlider(option3);
     localStorage.setItem("speed",option3.value);
     maxSpeed=option3.value;
@@ -89,7 +89,7 @@ else{
     label4.textContent = `sensor Range ${rayRange}`;
 }
 updateSlider(option4);
-option4.addEventListener("change", () => {
+option4.addEventListener("input", () => {
     updateSlider(option4);
     localStorage.setItem("rayRange",option4.value);
     rayRange=option4.value;
@@ -105,7 +105,7 @@ else{
     label5.textContent = `sensor angle ${rayAngle}`;
 }
 updateSlider(option5);
-option5.addEventListener("change", () => {
+option5.addEventListener("input", () => {
     updateSlider(option5);
     localStorage.setItem("rayAngle",option5.value);
     rayAngle=option5.value;
@@ -121,7 +121,7 @@ else{
     label6.textContent = `transparency ${alpha}`;
 }
 updateSlider(option6);
-option6.addEventListener("change", () => {
+option6.addEventListener("input", () => {
     updateSlider(option6);
     localStorage.setItem("alpha",option6.value);
     alpha=option6.value;
@@ -179,7 +179,7 @@ else{
     option7.value=parseInt(localStorage.getItem("genaticRandomness"));
     label7.textContent = `genatic randomness ${formatValue(genaticRandomness)}%`;
 }
-option7.addEventListener("change", () => {
+option7.addEventListener("input", () => {
     const value=sliderToValue(parseInt(option7.value));
     localStorage.setItem("genaticRandomness",parseInt(option7.value));
     genaticRandomness=value;
