@@ -1,9 +1,9 @@
 let greenRay =1;
 let redRay =1;
 let carCount=50;
-let lanes=3;
+let lanes=4;
 let genaticRandomness=0.001;
-let trafficProbablity=0.1;
+let trafficProbablity=0.19;
 let rayCount=20;
 let rayRange=300;
 let rayAngle=90;
@@ -24,6 +24,13 @@ const label4 = document.getElementById("label4");
 const label5 = document.getElementById("label5");
 const label6 = document.getElementById("label6");
 const label7 = document.getElementById("label7");
+function updateSlider(event) {
+    const value=event.value;
+    const min=parseFloat(event.min) || 0;
+    const max=parseFloat(event.max) || 100;
+    const percentage=((value-min)/(max-min))*100;
+    event.style.background=`linear-gradient(to right, #667eea 0%, #667eea ${percentage}%,#ddd ${percentage}%, #ddd 100%)`;
+}
 if (!localStorage.getItem("greenRay")) {
     option1.checked=true;
     greenRay=1;
@@ -65,7 +72,9 @@ else{
     option3.value=maxSpeed;
     label3.textContent = `max speed ${maxSpeed*10}`;
 }
+updateSlider(option3);
 option3.addEventListener("change", () => {
+    updateSlider(option3);
     localStorage.setItem("speed",option3.value);
     maxSpeed=option3.value;
     label3.textContent = `max speed ${maxSpeed*10}`;
@@ -79,7 +88,9 @@ else{
     option4.value=rayRange;
     label4.textContent = `sensor Range ${rayRange}`;
 }
+updateSlider(option4);
 option4.addEventListener("change", () => {
+    updateSlider(option4);
     localStorage.setItem("rayRange",option4.value);
     rayRange=option4.value;
     label4.textContent = `sensor Range ${rayRange}`;
@@ -93,7 +104,9 @@ else{
     option5.value=rayAngle;
     label5.textContent = `sensor angle ${rayAngle}`;
 }
+updateSlider(option5);
 option5.addEventListener("change", () => {
+    updateSlider(option5);
     localStorage.setItem("rayAngle",option5.value);
     rayAngle=option5.value;
     label5.textContent = `sensor angle ${rayAngle}`;
@@ -107,7 +120,9 @@ else{
     option6.value=alpha;
     label6.textContent = `transparency ${alpha}`;
 }
+updateSlider(option6);
 option6.addEventListener("change", () => {
+    updateSlider(option6);
     localStorage.setItem("alpha",option6.value);
     alpha=option6.value;
     label6.textContent = `transparency ${alpha}`;
