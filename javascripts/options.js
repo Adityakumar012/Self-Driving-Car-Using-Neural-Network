@@ -1,9 +1,9 @@
 let greenRay =1;
 let redRay =1;
 let carCount=50;
-let lanes=4;
+let lanes=3;
 let genaticRandomness=0.001;
-let trafficProbablity=0.19;
+let trafficProbablity=0.10;
 let rayCount=20;
 let rayRange=300;
 let rayAngle=90;
@@ -102,14 +102,14 @@ if (!localStorage.getItem("rayAngle")) {
 else{
     rayAngle=parseInt(localStorage.getItem("rayAngle"));
     option5.value=rayAngle;
-    label5.textContent = `sensor angle ${rayAngle}`;
+    label5.textContent = `sensor angle ${rayAngle}°`;
 }
 updateSlider(option5);
 option5.addEventListener("input", () => {
     updateSlider(option5);
     localStorage.setItem("rayAngle",option5.value);
     rayAngle=option5.value;
-    label5.textContent = `sensor angle ${rayAngle}`;
+    label5.textContent = `sensor angle ${rayAngle}°`;
 });
 if (!localStorage.getItem("alpha")) {
     option6.value=0.2;
@@ -185,3 +185,15 @@ option7.addEventListener("input", () => {
     genaticRandomness=value;
     label7.textContent = `genatic randomness ${formatValue(genaticRandomness)}%`;
 });
+if(localStorage.getItem("race")){
+    carCount=2;
+    race=1;
+    localStorage.removeItem("race");
+    const start = Date.now();
+    while (Date.now()-start<200) {
+    }
+}
+function racecar(){
+    localStorage.setItem("race",1);
+    location.reload();
+}

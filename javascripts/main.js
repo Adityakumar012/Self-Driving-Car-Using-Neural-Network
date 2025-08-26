@@ -1,6 +1,6 @@
 const canvas=document.querySelector("#mainCanvas");
 canvas.height=window.innerHeight;
-canvas.width=250;
+canvas.width=300;
 const ctx=canvas.getContext("2d");
 
 const road=new Road(canvas.width/2,canvas.width*0.9,lanes);
@@ -63,7 +63,10 @@ for(let i=0;i<n;i++){
 }
 function genrateTraffic(x){
     let y1=cars[best].y;
-    y1-=1600;
+    if(race){
+        y1=cars[1].y;
+    }
+    y1-=1000;
     let a=Math.random();
     if(a<x){
         traffic.push(new Car(road.getLaneCenter(Math.floor(Math.random()*lanes)),y1,30,50,0));
@@ -122,4 +125,5 @@ function animate(){
         count=0;
         last=curr;
     }
+    console.log(race)
 }

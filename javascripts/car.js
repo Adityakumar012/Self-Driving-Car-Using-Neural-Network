@@ -16,6 +16,7 @@ class Car{
         this.currentFriction=this.friction;
         this.ai=(driveable==2);
         this.controls=new Controls(driveable);
+        this.turnRate=0.03;
         if(driveable){
             this.sensor=new Sensor(this);
             this.neuralNetwork=new Network([this.sensor.sensorCount,100,40,4]);
@@ -135,18 +136,18 @@ class Car{
         //steering controls
         if(this.controls.left){
             if(this.speed>0){
-                this.angle+=0.03;
+                this.angle+=this.turnRate;
             }
             else if(this.speed<0){
-                this.angle-=0.03;
+                this.angle-=this.turnRate;
             }
         }
         if(this.controls.right){
             if(this.speed>0){
-                this.angle-=0.03;
+                this.angle-=this.turnRate;
             }
             else if(this.speed<0){
-                this.angle+=0.03;
+                this.angle+=this.turnRate;
             }
         }
         this.x-=Math.sin(this.angle)*this.speed;
