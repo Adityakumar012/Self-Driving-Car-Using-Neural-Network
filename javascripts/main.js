@@ -66,10 +66,11 @@ function genrateTraffic(x){
     if(race){
         y1=cars[1].y;
     }
-    y1-=1000;
+    y1-=1400;
     let a=Math.random();
     if(a<x){
         traffic.push(new Car(road.getLaneCenter(Math.floor(Math.random()*lanes)),y1,30,50,0));
+        traffic[traffic.length-1].speed=maxSpeed;
     }
 }
 const fps=document.querySelector("#fps");
@@ -77,6 +78,7 @@ let count=0;
 let last=performance.now();
 animate();
 function animate(){
+    alive=0;
     for(let i=0;i<traffic.length;i++){
         traffic[i].update([],[]);
     }
@@ -85,6 +87,7 @@ function animate(){
         if(cars[i].ai&&cars[i].y<cars[best].y){
             best=i;
         }
+        if(!cars[i].crashed)alive++;
     }
     canvas.height=window.innerHeight;
     ctx.save();
@@ -107,14 +110,15 @@ function animate(){
         cars[i].draw(ctx,(i==best));
     }
     if(race){
-        if(Math.floor(cars[1].y)%10==0)genrateTraffic(trafficProbablity);
+        if(Math.abs(Math.floor(cars[1].y))%groupDist<=group)genrateTraffic(trafficProbablity);
 
     }else{
-        if(Math.floor(cars[best].y)%10==0)genrateTraffic(trafficProbablity);
+        if(Math.abs(Math.floor(cars[best].y))%groupDist<=group)genrateTraffic(trafficProbablity);
     }
     // if(traffic.length){
     //     if(traffic[0].y>cars[best].y+1000)traffic.shift();
     // }
+    updateNeural(cars[best].neuralNetwork.levels,cars[best].controls);
     count++;
     ctx.globalAlpha=1;
     ctx.restore();
@@ -125,5 +129,5 @@ function animate(){
         count=0;
         last=curr;
     }
-    console.log(race)
+    console.log(alive);
 }

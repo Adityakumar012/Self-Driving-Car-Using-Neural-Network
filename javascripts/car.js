@@ -19,7 +19,7 @@ class Car{
         this.turnRate=0.03;
         if(driveable){
             this.sensor=new Sensor(this);
-            this.neuralNetwork=new Network([this.sensor.sensorCount,100,40,4]);
+            this.neuralNetwork=new Network([this.sensor.sensorCount,6,6,4]);
         }
         this.points=[];
         this.crashed=false;
@@ -162,7 +162,7 @@ class Car{
             ctx.fillStyle="black";
             if(this.driveable)ctx.fillStyle="#d900ffff";
             if(!this.ai&&this.driveable){
-                ctx.fillStyle="#ffff00ff";
+                ctx.fillStyle="#0033ffff";
                 ctx.globalAlpha=1;
             }
 

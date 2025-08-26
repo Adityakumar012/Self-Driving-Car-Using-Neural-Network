@@ -1,58 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Squada+One&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Self Driving Car</title>
+    <link rel="stylesheet" href="styles/network.css">
     <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
-    <canvas id="mainCanvas"></canvas>
-    <div style="height: 10px;color: white;" id="fps">fps:0</div>
-    <div>
-        <button onclick="save()">💾</button>
-        <button onclick="reset()">🗑️</button>
-    </div>
-    <div>
-        <li><input type="checkbox" id="option1" class="checkbox">display green sensor ray</li>
-        <li><input type="checkbox" id="option2" class="checkbox">display red sensor ray</li>
-        <li>
-            <span id="label3">max speed 70</span>
-            <input type="range" id="option3" class="angle-slider" min="5" max="30" value="7" step="1">
-        </li>
-        <li>
-            <span id="label4">sensor range 300</span>
-            <input type="range" id="option4" class="angle-slider" min="100" max="1000" value="200" step="20">
-        </li>
-        <li>
-            <span id="label5">sensor angle 90°</span>
-            <input type="range" id="option5" class="angle-slider" min="0" max="360" value="90" step="5">
-        </li>
-        <li>
-            <span id="label6">transparency 0.2</span>
-            <input type="range" id="option6" class="angle-slider" min="0.1" max="1" value="0.2" step="0.1">
-        </li>
-        <li>
-            <span id="label7">genetic randomness 10%</span>
-            <input type="range" id="option7" class="log-slider" min="0" max="40" value="10" step="1">
-        </li>
-        <li>
-            <span id="label8">number of sensor</span>
-            <input type="number" id="option8"  min="1" max="1000" value="50" step="1">
-        </li>
-        <li>
-            <span id="label9">number of cars</span>
-            <input type="number" id="option9"  min="1" max="1000" value="50" step="10">
-        </li>
-        <button onclick="racecar()">race your own car</button>
-    </div>
-    <div class="control-button">
-        <div></div>
-        <div id="up">⇧</div>
-        <div></div>
-        <div id="left">⇦</div>
-        <div id="down">⇩</div>
-        <div id="right">⇨</div>
+    <div class="main">
+        <div class="left">
+            <div id="fps">fps:0</div>
+            <div class="control-button">
+                <div></div>
+                <div id="up">⇧</div>
+                <div></div>
+                <div id="left">⇦</div>
+                <div id="down">⇩</div>
+                <div id="right">⇨</div>
+            </div>
+            <div class="button-wrapper">
+                <button onclick="save()">save the current best car</button>
+                <button onclick="reset()">delete saved car</button>
+                <button onclick="location.reload()">refresh</button>
+            </div>
+            
+            <div>
+                <div class="checkbox-wrapper">
+                    <div><input type="checkbox" id="option1" class="checkbox">display green sensor ray</div>
+                    <div><input type="checkbox" id="option2" class="checkbox">display red sensor ray</div>
+                </div>
+                <div>
+                    <span id="label3">max speed 70</span>
+                    <input type="range" id="option3" class="angle-slider" min="5" max="30" value="7" step="1">
+                </div>
+                <div>
+                    <span id="label4">sensor range 300</span>
+                    <input type="range" id="option4" class="angle-slider" min="100" max="1000" value="200" step="20">
+                </div>
+                <div>
+                    <span id="label5">sensor angle 90°</span>
+                    <input type="range" id="option5" class="angle-slider" min="0" max="360" value="90" step="5">
+                </div>
+                <div>
+                    <span id="label6">transparency 0.2</span>
+                    <input type="range" id="option6" class="angle-slider" min="0.1" max="1" value="0.2" step="0.1">
+                </div>
+                <div>
+                    <span id="label7">genetic randomness 10%</span>
+                    <input type="range" id="option7" class="log-slider" min="0" max="40" value="10" step="1">
+                </div>
+                <div>
+                    <span id="label8">number of sensor (CHANGE WILL DELETE SAVED CAR)</span>
+                    <input type="number" id="option8"  min="1" max="1000" value="50" step="1">
+                </div>
+                <div>
+                    <span id="label9">number of cars</span>
+                    <input type="number" id="option9"  min="1" max="1000" value="50" step="10">
+                </div>
+                <button onclick="racecar()">race your own car</button>
+                <div class="network">
+                    <div class="level1">
+                        <div class="v11"></div>
+                        <div class="v12"></div>
+                        <div class="v13"></div>
+                        <div class="v14"></div>
+                        <div class="v15"></div>
+                        <div class="v16"></div>
+                    </div>
+                    <div class="level2">
+                        <div class="v21"></div>
+                        <div class="v22"></div>
+                        <div class="v23"></div>
+                        <div class="v24"></div>
+                        <div class="v25"></div>
+                        <div class="v26"></div>
+                    </div>
+                    <div class="level3">
+                        <div class="v31">↑</div>
+                        <div class="v32">↓</div>
+                        <div class="v33">←</div>
+                        <div class="v34">→</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <canvas id="mainCanvas"></canvas>
+
     </div>
     <script src="javascripts/animateControls.js"></script>
     <script src="javascripts/geneticAlgo.js"></script>
@@ -62,6 +99,7 @@
     <script src="javascripts/road.js"></script>
     <script src="javascripts/sensor.js"></script>
     <script src="javascripts/car.js"></script>
+    <script src="javascripts/neuralvisual.js"></script>
     <script src="javascripts/main.js"></script>
 </body>
 </html>
