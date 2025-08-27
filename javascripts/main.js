@@ -91,14 +91,17 @@ function animate(){
     }
     canvas.height=window.innerHeight;
     ctx.save();
+    let cameraY=0;
     if(best!=-1){
         animateControl(cars[best].controls)
     }
     if(race){
         ctx.translate(0,-cars[1].y+canvas.height*0.7);
+        cameraY=cars[1].y;
     }
     else{
         ctx.translate(0,-cars[best].y+canvas.height*0.7);
+        cameraY=cars[best].y;
     }
     road.draw(ctx);
     for(let i=0;i<traffic.length;i++){
@@ -107,7 +110,7 @@ function animate(){
     for(let i=0;i<n;i++){
         ctx.globalAlpha=alpha;
         if((i==best))ctx.globalAlpha=1;
-        cars[i].draw(ctx,(i==best));
+        cars[i].draw(ctx,(i==best),cameraY);
     }
     if(race){
         if(Math.abs(Math.floor(cars[1].y))%groupDist<=group)genrateTraffic(trafficProbablity);
@@ -129,5 +132,4 @@ function animate(){
         count=0;
         last=curr;
     }
-    console.log(alive);
 }

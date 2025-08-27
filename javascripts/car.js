@@ -17,6 +17,7 @@ class Car{
         this.ai=(driveable==2);
         this.controls=new Controls(driveable);
         this.turnRate=0.03;
+        this.slidingPointer=0;
         if(driveable){
             this.sensor=new Sensor(this);
             this.neuralNetwork=new Network([this.sensor.sensorCount,6,6,4]);
@@ -82,7 +83,10 @@ class Car{
                 return true;
             }
         }
-        for(let i=0;i<traffic.length;i++){
+        while(this.slidingPointer<traffic.length&&traffic[this.slidingPointer].y>this.y+400){
+            this.slidingPointer++;
+        }
+        for(let i=this.slidingPointer;i<traffic.length &&traffic[i].y>this.y-500;i++){
             if(this.#findPolyIntersection(this.points,traffic[i].points)){
                 return true;
             }
@@ -153,7 +157,8 @@ class Car{
         this.x-=Math.sin(this.angle)*this.speed;
         this.y-=Math.cos(this.angle)*this.speed;
     }
-    draw(ctx,isBest){ 
+    draw(ctx,isBest,cameraY){ 
+        if(this.crashed&&cameraY+600<this.y){return;}
         if(this.driveable&&isBest)this.sensor.draw(ctx);
         if(this.crashed){
             ctx.fillStyle="#ff0000ff";
