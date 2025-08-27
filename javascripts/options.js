@@ -156,7 +156,7 @@ else{
     option9.value=carCount;
 }
 option9.addEventListener("change", () => {
-    if(parseInt(option9.value)>1000){
+    if(parseInt(option9.value)>5000){
         option9.value=1000;
     }
     localStorage.setItem("carCount",parseInt(option9.value));

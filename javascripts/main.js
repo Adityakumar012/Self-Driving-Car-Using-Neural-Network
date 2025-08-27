@@ -105,7 +105,7 @@ function animate(){
     }
     road.draw(ctx);
     for(let i=0;i<traffic.length;i++){
-        traffic[i].draw(ctx);
+        traffic[i].draw(ctx,0,cameraY);
     }
     for(let i=0;i<n;i++){
         ctx.globalAlpha=alpha;

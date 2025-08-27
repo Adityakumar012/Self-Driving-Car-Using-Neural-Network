@@ -121,7 +121,8 @@ class Car{
         this.currentFriction=this.friction;
         // steering friction on car
         if(this.controls.left||this.controls.right){
-            this.currentFriction=this.steeringFriction;
+            // this.currentFriction=this.steeringFriction;
+            this.speed=this.speed*0.98;
         }
         //brake friction on car
         if(this.controls.brakes){
@@ -158,7 +159,7 @@ class Car{
         this.y-=Math.cos(this.angle)*this.speed;
     }
     draw(ctx,isBest,cameraY){ 
-        if(this.crashed&&cameraY+600<this.y){return;}
+        if(cameraY+600<this.y){return;}
         if(this.driveable&&isBest)this.sensor.draw(ctx);
         if(this.crashed){
             ctx.fillStyle="#ff0000ff";
