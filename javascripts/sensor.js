@@ -26,15 +26,13 @@ class Sensor{
                     }
                 }
             }
-            for(let j=0;j<traffic.length;j++){
+            for(let j=this.car.slidingPointer;j<traffic.length&&traffic[j].y>this.car.y-1200;j++){
                 for(let l=0;l<traffic[j].points.length;l++){
                     const result=this.#findIntersection(this.sensor[i][0],this.sensor[i][1],traffic[j].points[l],traffic[j].points[(l+1)%traffic[j].points.length]);
-                    if(result!=null){
-                        if(ratio>result.ratio){
-                            ratio=result.ratio;
-                            x=result.x;
-                            y=result.y;
-                        }
+                    if(result!=null&&ratio>result.ratio){
+                        ratio=result.ratio;
+                        x=result.x;
+                        y=result.y;
                     }
                 }
             }

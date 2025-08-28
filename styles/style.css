@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    /* border: 1px solid red; */
 }
 
 body {
@@ -36,17 +37,10 @@ body {
 }
 
 #fps {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    background: #238636;
     color: white;
-    padding: 6px 12px;
-    border-radius: 6px;
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 500;
     z-index: 100;
-    font-family: 'Courier New', monospace;
 }
 
 .control-button {

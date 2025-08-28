@@ -118,9 +118,6 @@ function animate(){
     }else{
         if(Math.abs(Math.floor(cars[best].y))%groupDist<=group)genrateTraffic(trafficProbablity);
     }
-    // if(traffic.length){
-    //     if(traffic[0].y>cars[best].y+1000)traffic.shift();
-    // }
     updateNeural(cars[best].neuralNetwork.levels,cars[best].controls);
     count++;
     ctx.globalAlpha=1;

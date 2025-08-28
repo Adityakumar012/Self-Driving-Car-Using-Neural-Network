@@ -35,6 +35,8 @@ class Car{
             this.maxSpeed*=this.nonDriveableSpeed;
         }
         if(!this.crashed){
+            this.#move(); //car movement physics
+            this.#findPoints();
             if(this.driveable){
                 this.sensor.update(border,traffic);
                 const ratio=this.sensor.intersection.map(e=>1-e.ratio);
@@ -45,10 +47,8 @@ class Car{
                     this.controls.left=output[2];
                     this.controls.right=output[3];
                 }
+                this.crashed=this.#checkCrash(border,traffic);
             }
-            this.#move(); //car movement physics
-            this.#findPoints();
-            this.crashed=this.#checkCrash(border,traffic);
         }
     }
     #findPoints(){
@@ -166,7 +166,7 @@ class Car{
         }
         else{
             ctx.fillStyle="black";
-            if(this.driveable)ctx.fillStyle="#d900ffff";
+            if(this.driveable)ctx.fillStyle="rgba(238, 0, 255, 1)";
             if(!this.ai&&this.driveable){
                 ctx.fillStyle="#0033ffff";
                 ctx.globalAlpha=1;
