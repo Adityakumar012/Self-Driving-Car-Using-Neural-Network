@@ -81,9 +81,9 @@ class Sensor{
                     ctx.lineTo(this.sensor[i][1].x,this.sensor[i][1].y);
                     ctx.stroke();
                 }
-                ctx.shadowColor = "#000000ff";
-                ctx.shadowBlur = 2;
-                ctx.strokeStyle="#00ff1eff";
+                // ctx.shadowColor = "#000000ff";// this is causing a huge lage in mobile 
+                // ctx.shadowBlur = 2;
+                ctx.strokeStyle="#11ff00ff";
                 if(greenRay){
                     ctx.beginPath();
                     ctx.moveTo(this.sensor[i][0].x,this.sensor[i][0].y);

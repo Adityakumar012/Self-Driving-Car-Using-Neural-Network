@@ -5,8 +5,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Squada+One&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-    <meta name="viewport" content="width=device-width, initial-scale=0.4">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Self Driving Car</title>
     <link rel="stylesheet" href="styles/network.css">
     <link rel="stylesheet" href="styles/style.css">
@@ -14,7 +13,10 @@
 <body>
     <div class="main">
         <div class="left">
-            <div id="fps">FPS:0</div>
+            <div class="status">
+                <span id="fps">FPS:0</span>
+                <span id="alive">Alive :0</span>
+            </div>
             <div class="control-button">
                 <div></div>
                 <div id="up">⇧</div>
@@ -29,28 +31,28 @@
                 <button onclick="location.reload()">Refresh 🔁</button>
             </div>
             
-            <div>
+            <div class="option-wapper">
                 <div class="checkbox-wrapper">
                     <div><input type="checkbox" id="option1" class="checkbox">Display Green Sensor Ray</div>
                     <div><input type="checkbox" id="option2" class="checkbox">Display Red Sensor Ray</div>
                 </div>
-                <div>
+                <div class="slider-item">
                     <span id="label3">Max Speed 70</span>
                     <input type="range" id="option3" class="angle-slider" min="5" max="30" value="7" step="1">
                 </div>
-                <div>
+                <div class="slider-item">
                     <span id="label4">Sensor Range 300</span>
                     <input type="range" id="option4" class="angle-slider" min="100" max="1000" value="200" step="20">
                 </div>
-                <div>
+                <div class="slider-item">
                     <span id="label5">Sensor Angle 90°</span>
                     <input type="range" id="option5" class="angle-slider" min="0" max="360" value="90" step="5">
                 </div>
-                <div>
+                <div class="slider-item">
                     <span id="label6">Transparency 0.2</span>
                     <input type="range" id="option6" class="angle-slider" min="0.1" max="1" value="0.2" step="0.1">
                 </div>
-                <div>
+                <div class="slider-item">
                     <span id="label7">Genetic Randomness 10%</span>
                     <input type="range" id="option7" class="log-slider" min="0" max="40" value="10" step="1">
                 </div>
@@ -58,7 +60,7 @@
                     <span id="label8">Number Of Sensor (CHANGE WILL DELETE SAVED CAR)</span>
                     <input type="number" id="option8"  min="1" max="1000" value="50" step="1">
                 </div>
-                <div>
+                <div >
                     <span id="label9">Number Of Cars</span>
                     <input type="number" id="option9"  min="1" max="1000" value="50" step="10">
                 </div>

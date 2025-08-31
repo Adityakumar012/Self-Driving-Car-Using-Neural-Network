@@ -68,6 +68,7 @@ function genrateTraffic(x){
     }
 }
 const fps=document.querySelector("#fps");
+const alivecount=document.querySelector("#alive");
 let count=0;
 let last=performance.now();
 animate();
@@ -123,4 +124,5 @@ function animate(){
         count=0;
         last=curr;
     }
+    alivecount.textContent = "Alive: " + alive;
 }

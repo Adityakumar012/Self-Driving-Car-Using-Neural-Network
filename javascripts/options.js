@@ -1,7 +1,7 @@
 let greenRay =1;
 let redRay =1;
 let carCount=50;
-let lanes=3;
+let lanes=4;
 let genaticRandomness=0.001;
 let trafficProbablity=1;
 let rayCount=19;
@@ -148,16 +148,16 @@ option8.addEventListener("change", () => {
     location.reload();
 });
 if (!localStorage.getItem("carCount")) {
-    option9.value=50;
-    carCount=50;
+    option9.value=200;
+    carCount=200;
 }
 else{
     carCount=parseInt(localStorage.getItem("carCount"));
     option9.value=carCount;
 }
 option9.addEventListener("change", () => {
-    if(parseInt(option9.value)>5000){
-        option9.value=1000;
+    if(parseInt(option9.value)>10000){
+        option9.value=10000;
     }
     localStorage.setItem("carCount",parseInt(option9.value));
     carCount=parseInt(option9.value);
