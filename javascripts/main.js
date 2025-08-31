@@ -1,31 +1,25 @@
+if(!localStorage.getItem("bestneural")&&!localStorage.getItem("check")){
+    localStorage.setItem("check","1");
+    localStorage.setItem("bestneural",JSON.stringify(defaultNetwork));
+}
 const canvas=document.querySelector("#mainCanvas");
 canvas.height=window.innerHeight;
 canvas.width=300;
 const ctx=canvas.getContext("2d");
-
 const road=new Road(canvas.width/2,canvas.width*0.9,lanes);
 let n=carCount;
-const cars=genrateCars(n);
 let best=0;
+const cars=genrateCars(n);
 const traffic=[
     // new Car(road.getLaneCenter(0),400,260,50,0),
     // new Car(road.getLaneCenter(2),-300,260,50,0),
 ];
 function save(){
     localStorage.setItem("bestneural",JSON.stringify(cars[best].neuralNetwork));
-    document.body.style.backgroundColor="red";
-    setTimeout(()=>{
-        document.body.style.backgroundColor="rgb(47, 47, 47)";
-    },100)
 }
 function reset(){
     localStorage.removeItem("bestneural");
-    document.body.style.backgroundColor="red";
-    setTimeout(()=>{
-        document.body.style.backgroundColor="rgb(47, 47, 47)";
-    },100)
 }   
-
 function genrateCars(n){
     const c=[];
     if(localStorage.getItem("bestneural")){

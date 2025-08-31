@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     /* border: 1px solid red; */
+    will-change: transform;
 }
 
 body {
@@ -10,7 +11,7 @@ body {
     background: #0d1117;
     color: #f0f6fc;
     height: 100vh;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .main {
@@ -34,6 +35,7 @@ body {
     margin-top: 1vh;
     margin-bottom: 1vh;
     border-radius: 30px;
+    /* overflow-y:hidden; */
 }
 
 #fps {
@@ -48,12 +50,12 @@ body {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
     gap: 8px;
-    width: 150px;
+    width: 380px;
     margin: 0 auto;
 }
 
 .control-button div {
-    height: 40px;
+    height: 60px;
     background: #21262d;
     border: 1px solid #30363d;
     border-radius: 6px;
@@ -71,6 +73,7 @@ body {
 #right { grid-column: 3; grid-row: 2; }
 
 .button-wrapper {
+    width: 380px;
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -111,6 +114,7 @@ body {
 }
 
 .checkbox-wrapper {
+    width: 380px;
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -141,7 +145,7 @@ body {
 }
 
 .angle-slider, .log-slider {
-    width: 100%;
+    width: 380px;
     height: 4px;
     background: #30363d;
     border-radius: 2px;
@@ -169,7 +173,7 @@ body {
 }
 
 input[type="number"] {
-    width: 100%;
+    width: 380px;
     padding: 6px 8px;
     background: #0d1117;
     border: 1px solid #30363d;
@@ -184,8 +188,11 @@ input[type="number"]:focus {
     border-color: #58a6ff;
 }
 
+.left > div:last-child{
+    width: 380px;
+}
 .left > div:last-child > button {
-    width: 100%;
+    width: 380px;
     padding: 10px;
     background: #f85149;
     color: white;
@@ -206,26 +213,17 @@ input[type="number"]:focus {
     border-left: 1px solid #30363d;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 600px) {
     .main {
-        /* flex-direction: column; */
+        width: 180vw;
+        height: 180vh;
     }
     
     .left {
-        /* width: 100%; */
-        height: 100vh;
-        border-bottom: 1px solid #30363d;
+        height: 100%;
+        width: 480px;
         margin-left: 0;
         margin-right: 0;
     }
     
-    #mainCanvas {
-        border-left: none;
-        border-top: 1px solid #30363d;
-    }
-    
-    #fps {
-        top: 8px;
-        right: 8px;
-    }
 }

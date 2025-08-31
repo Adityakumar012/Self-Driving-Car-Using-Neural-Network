@@ -4,7 +4,7 @@ let carCount=50;
 let lanes=3;
 let genaticRandomness=0.001;
 let trafficProbablity=1;
-let rayCount=20;
+let rayCount=19;
 let rayRange=300;
 let rayAngle=90;
 let alpha=0.2;
@@ -131,8 +131,8 @@ option6.addEventListener("input", () => {
     label6.textContent = `transparency ${alpha}`;
 });
 if (!localStorage.getItem("rayCount")) {
-    option8.value=20;
-    rayCount=20;
+    option8.value=19;
+    rayCount=19;
 }
 else{
     rayCount=parseInt(localStorage.getItem("rayCount"));
